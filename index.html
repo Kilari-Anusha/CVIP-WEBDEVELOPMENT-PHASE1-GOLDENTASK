@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Code Editor</title>
+    <!-- Include CodeMirror CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.3/codemirror.min.css">
+    <!-- Include CodeMirror JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.3/codemirror.js"></script>
+    <!-- Include a CodeMirror mode (e.g., JavaScript) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.3/mode/javascript/javascript.js"></script>
+    <!-- Include CodeMirror theme (e.g., default) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.3/theme/default.css">
+    <!-- Include CodeMirror keymap (optional) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.3/keymap/sublime.js"></script>
+</head>
+<body>
+    <textarea id="code-editor"></textarea>
+    <button id="run-button">Run Code</button>
+    <div id="output"></div>
+
+    <script>
+        // Initialize CodeMirror
+        var codeEditor = CodeMirror.fromTextArea(document.getElementById("code-editor"), {
+            mode: "javascript", // Change this to the desired language mode
+            theme: "default",   // Change this to the desired theme
+            keyMap: "sublime"   // Change this to the desired keymap (optional)
+        });
+
+        // Function to execute code
+        function runCode() {
+            var code = codeEditor.getValue();
+            try {
+                var result = eval(code); // Evaluate the code (this is a simplified example)
+                document.getElementById("output").innerHTML = String(result);
+            } catch (error) {
+                document.getElementById("output").innerHTML = "Error: " + error;
+            }
+        }
+
+        // Bind the runCode function to the button click event
+        document.getElementById("run-button").addEventListener("click", runCode);
+    </script>
+</body>
+</html>
